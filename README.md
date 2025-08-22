@@ -1,2 +1,2 @@
-# Especialidad-Monetaria-UNAM
-Repositorio de Econometria. Especialidad en Economía Monetaria y Financiera
+# Especialidad en Economía Monetaia y Financiera 2025-UNAM
+Repositorio para los ejecricios de la materia de Econometrí
