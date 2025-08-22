@@ -1,3 +1,4 @@
 # Clases
-### 25/08/21
+### 1. Clase 0 (NA)
+### 2. [Clase 1: 25/08/21](https://github.com/LIZZETHGOMEZ/Especialidad-Monetaria-UNAM/blob/main/Clases/250821_Clase2.R) (Análisis descriptivo)
 
