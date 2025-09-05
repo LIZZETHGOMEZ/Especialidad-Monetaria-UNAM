@@ -263,3 +263,96 @@ install.packages('olsrr')
 library(olsrr)
 ols_vif_tol(mod1)
 # Notemos que el resultado es menor a 5, por lo que no hay multicolinealidad
+
+# ------------------------------------------------------------
+# 4 de septiembre de 2025
+# Continuación de clase
+
+# ------------------------------------------------------------
+# AUTOCORRELACIÓN 
+# Cuando se maneje tiempo, seimpre se referirá a Autcorrelación
+# El tiempo como una v.a. discreta, será Determinística
+# El tiempo como var aleatoria continua, será Estocástica
+
+# Si se considera un periodo para considerar la explicación de una variable (es decir, un rezago)
+# entonces se considera de 1er orden y así para cada rezago i de orden i
+# Por ejemplo el TC de hoy puede estar determinado por el TC del periodo anterior, 
+# es decir par el TC de ayer, y por lo cual se dice que tiene Autocorrelación
+
+# Si Cov(TCi, TCj) = 0 -> No hay Autocorrelación
+# Si Cov(TCi, TCj) =! 0 -> Sí hay Autocorrelación (cuando el pasado empieza a afectar/explicar los precios del futuro)
+
+# ------------------------------------------------------------
+# Lo que nos interesa es saber si los Errores no presentan Autocorrelación
+# Dos pruebas:
+# 1. Durbin Watson -> Pruba No Paramétrica (i.e. que la probabilidad no interviene de manera directa)
+# No es prueba robusta, se toma el valor central
+# H0: u no tienen autocorrelación
+# H1: u sí tienen autocorrelación (cuando se aleja del valor central 0:4 -> valor central es 2)
+# Si la prueba da 1.7 o 2.3, se rechaza H0 y se acepta H1
+# Para aceptar H0 se requiere P-value > 0.05
+
+# -----------------------------------------------------------
+# PRUEBAS DE AUTOCORRELACIÓN
+
+# Durbin Watson
+dwtest(mod1)
+
+# Breush-Godfrey_LM
+bgtest(mod1)
+# Sí hay autocorrelación P-value < 0.05 se rechaza H0
+
+# Hteroscedasticidad / Varianza constante
+# Homocedasticidad:
+# En cada punto de la regresión (para cada obs) la varianza es constante
+# Cuando la varianza no es constante, entonces hay Heteroscedasticidad
+# H0: La varianza es Homocedástica
+# H1: La varoanza es Heteroscedastica
+# P-Value > 0.05 para aceptar H0
+
+# Prueba de Breush-Pagan para Heteroscedasticidad
+bptest(mod1)
+
+library(moments)
+library(tseries)
+
+# ----------------------------------------------------------
+# Aplicamos logaritmos a las variables
+lbm10 <- log(datosb$MEX10A)
+
+# Vamos a incorporar el logaritmo al objeto de datos (a la base)
+# el log permite hommogeneizar la serie
+# variable de nivel se llama cuando tenemos la serie sin ninguna transformació (Prpiedades maeginales)
+# Cuando se tiene logaritmo (se interpretan como elasticidades)
+# Si la dependiente está en log, se interpreta como tasa de crecimeinto
+datosb$lBM10 <- log(datosb$MEX10A)
+datosb$lipc <- log(datosb$IPC_MXX)
+datosb$ltc <- log(datosb$MXNUSD)
+datosb$lwti <- log(datosb$WTI)
+
+View(datosb)
+
+
+# -------------------------------------------------------------------------
+# TAREA
+# 1.Tomar como referencia el Gujarati y resumir los supuestos del modelo clásico
+# de la regresión lineal
+
+# 2.Realizar un modelo de doble logarítmo (log-log)
+# (Variable depdiente e independient tienen logarítmo)
+# Utilizar otra variable dependiente distinto a la clase
+
+# 3. Replicar scripts de la clase
+# 4. Incorporar la interpretación: Gujarati Cap. 6 se explica la interpretación
+# de modelos con logarítmo
+# ---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
