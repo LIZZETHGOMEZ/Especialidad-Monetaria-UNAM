@@ -130,6 +130,73 @@ plot(gasto_desc$figure, type = 'b',
      col = 'darkgreen', las = 1, lwd = 2)
 grid()
 
+# #############################################
+#                   Parte 2
+# ############################################
+
+# Filtro Holdrick Prescott
+install.packages("mFilter")
+library(mFilter)
+
+options(scipen = 999)
+
+d_publico <- data.frame(des_ingreso2$final, des_gasto2$final)
+ts.plot(d_publico$des_ingreso2.final)
+
+ingreso2 <- ts(d_publico$des_ingreso2.final, start = c(1977,1), frequency = 12)
+ts.plot(ingreso2)
+
+# ----------------------------------------------------------
+#Filtro Holdrick Prescott
+
+# Para el caso del filtro Holdrick-Prescott se define 
+# el siguiente parametro lambda
+
+# lambda = 100 -> datos anuales
+# lambda = 1600 -> datos trimestrales
+# lambda = 14400 -> datos mensuales
+
+# Caso ingreso
+ingreso2_HP <- hpfilter(ingreso2, freq = 14400)
+plot(ingreso2_HP)
+ingreso2_HP <- data.frame(ingreso2_HP$trend)
+
+
+# ----------------------------------
+# Caso del gasto
+gasto2 <- ts(d_publico$des_gasto2.final, start = c(1977,1), frequency = 12)
+ts.plot(gasto2)
+
+gasto2_HP <- hpfilter(gasto2, freq = 14400)
+plot(gasto2_HP)
+
+gasto2_HP <- data.frame(gasto2_HP$trend)
+
+# ---------------------------------------------------------
+# Filtro Cristiano Fitzgerald
+
+#Caso ingreso
+ingreso2_CF <- cffilter(ingreso2)
+plot(ingreso2_CF)
+ingreso2_CF <- data.frame(ingreso2_CF$trend)
+
+
+# Caso gasto
+gasto2_CF <- cffilter(gasto2)
+plot(gasto2_CF)
+gasto2_CF <-data.frame(gasto2_CF$trend)
+
+# Crear dataframe 
+datos_publico <- data.frame(publico$mes,
+                             d_publico$des_ingreso2.final,
+                             d_publico$des_gasto2.final,
+                             ingreso2_HP$Series.1,
+                             ingreso2_CF$Series.1,
+                             gasto2_CF$Series.1,
+                            gasto2_HP$Series.1)
+
+
+# Guardamos Dataframe
 
 
 

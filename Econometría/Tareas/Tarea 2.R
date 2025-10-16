@@ -5,7 +5,7 @@
 #                   Modelo de Probabilidades
 #                   Lizzeth Gómez Rodríguez
 # ######################################################################
-# Replicar el script para estimar el modelo MPL y Logit (hasta el Odds Ratio)
+# Replicar el script para estimar el modelo MPL y Logit (hasta eficiencia del modelo)
 # Utilizando como variable dependiente (respuesta) a la accion de netflix
 # netflix = f(Tlevisa, BMV, ACMX)
 
